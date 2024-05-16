@@ -23,8 +23,6 @@ jobs:
     - name: NPM Install
       run: |
        npm install
-       rm -rf node_modules
-       rm -rf frontend/dist frontend/node_modules dist build
        npm start
     - name: Download Qwiet CLI
       run: |
