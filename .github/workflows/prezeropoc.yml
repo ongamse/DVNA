@@ -20,10 +20,10 @@ jobs:
       with:
         distribution: zulu
         java-version: 8
-    - name: NPM Install
-      run: |
-       npm install
-       npm start
+    - name: Setup NPM
+      uses: actions/setup-node@v3
+      with:
+          node-version: "18.x"
     - name: Download Qwiet CLI
       run: |
         curl https://cdn.shiftleft.io/download/sl > ${GITHUB_WORKSPACE}/sl && chmod a+rx ${GITHUB_WORKSPACE}/sl
