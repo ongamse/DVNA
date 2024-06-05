@@ -20,7 +20,7 @@ jobs:
           node-version: 6.x
 
       - name: Install npm@5
-        run: npm install -g npm@5
+        run: npm install -g npm@6
 
       - name: Install dependencies
         run: npm install
