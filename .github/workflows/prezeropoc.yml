@@ -34,7 +34,7 @@ jobs:
         ${GITHUB_WORKSPACE}/sl analyze --strict --wait \
           --app DVNA \
           --tag branch=${{ github.head_ref }} \
-          --jssrc . -- --package-json ./package.json
+          --js . -- --package-json package.json
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN0 }}
         SHIFTLEFT_API_HOST: www.shiftleft.io
