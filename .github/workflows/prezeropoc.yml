@@ -33,7 +33,8 @@ jobs:
         ${GITHUB_WORKSPACE}/sl --version
         ${GITHUB_WORKSPACE}/sl analyze --strict --wait \
           --app DVNA \
-          --tag branch=${{ github.head_ref }}
+          --tag branch=${{ github.head_ref }} \
+          --js .
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN0 }}
         SHIFTLEFT_API_HOST: www.shiftleft.io
