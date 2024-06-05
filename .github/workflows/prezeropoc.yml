@@ -11,28 +11,7 @@ on:
     - cron: '0 11 * * 6'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [6.x]
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Install npm@5
-        run: npm install -g npm@5
-
-      - name: Install dependencies
-        run: npm install
-        
+      
   NextGen-Static-Analysis:
     runs-on: ubuntu-latest
     steps:
