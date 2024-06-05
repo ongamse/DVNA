@@ -11,6 +11,28 @@ on:
     - cron: '0 11 * * 6'
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [6.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install npm@5
+        run: npm install -g npm@5
+
+      - name: Install dependencies
+        run: npm install
+        
   NextGen-Static-Analysis:
     runs-on: ubuntu-latest
     steps:
@@ -20,12 +42,6 @@ jobs:
       with:
         distribution: zulu
         java-version: 8
-    - name: Setup NPM
-      uses: actions/setup-node@v3
-      with:
-          node-version: "18.x"
-    - name: Run NPM Install
-      run: npm install
       
     - name: Download Qwiet CLI
       run: |
@@ -34,10 +50,9 @@ jobs:
     - name: preZero Static Analysis
       run: |
         ${GITHUB_WORKSPACE}/sl --version
-        ${GITHUB_WORKSPACE}/sl analyze --strict --wait \
+        SHIFTLEFT_SBOM_GENERATOR=1 ${GITHUB_WORKSPACE}/sl analyze --strict --wait \
           --app DVNA --verbose \
           --tag branch=${{ github.head_ref }} \
-          --js . -- --package-json ./package.json --include-configs --include-tests
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN0 }}
         SHIFTLEFT_API_HOST: www.shiftleft.io
